@@ -1,0 +1,49 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>País</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">País</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-title size="large">Acá algunas universidades</ion-title>
+  
+  <ion-grid>
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="12" size-md="8" size-lg="6">
+        <ion-item>
+         
+          <ion-label position="floating">Nombre del país (en inglés)</ion-label>
+          <ion-input [(ngModel)]="countryName" type="text"></ion-input>
+        </ion-item>
+        <ion-button expand="full" (click)="searchUniversities()">Buscar Universidades</ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-justify-content-center" *ngIf="universities.length > 0">
+      <ion-col size="12" size-md="8" size-lg="6">
+        <ion-card *ngFor="let university of universities">
+          <ion-card-header>
+            <ion-card-title>{{ university.name }}</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <p>Domain: {{ university.domains }}</p>
+            <p><a [href]="university.web_pages[0]" target="_blank">Website</a></p>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-justify-content-center" *ngIf="universities.length === 0 && countryName">
+      <ion-col size="12" size-md="8" size-lg="6">
+        <p>No se encontraron universidades para el país ingresado.</p>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
